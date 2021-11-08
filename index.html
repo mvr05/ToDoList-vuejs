@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400&family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>To Do List</title>
+</head>
+<body>
+    <div class="todoList">
+        <div class="container" id="app">
+            <div class="stats">
+                <h3 class="stats_title">{{"Текущие задачи: " + tasks.length}}</h3>
+                <task
+                    v-for = "(data, index) in tasks"
+                    :data = "data" 
+                    :key = "index"
+                    @task_delete = "delete_tasks(index)" 
+                    @task_done = "add_done_tasks(index)">
+                </task>
+            </div>
+            <div class="add_task">
+                <div class="add_task_input">
+                    <input type="date" 
+                        v-model = "new_task.dates"
+                        class = "add_task_title"> <br>
+                    <input type="text" 
+                        v-model = "new_task.title" 
+                        class="add_task_title" 
+                        placeholder="Название задачи"> <br>
+                    <textarea 
+                        v-model = "new_task.desc" 
+                        class="add_task_subtitle" 
+                        placeholder="Описание задачи">
+                    </textarea>
+                </div>
+                <button @click = "add_task()" class="add_task_done">Добавить</button>
+            </div>
+        </div>
+        <div id="app2" class="container">
+            <div class="stats">
+                <h3 class="stats_title">{{"Выполнено задач: " + done_tasks.length}}</h3>
+                <taskend
+                    @task_delete = "delete_tasks(index)" 
+                    :data = "data" 
+                    v-for = "(data, index) in done_tasks"
+                    :key = "index">
+                </taskend>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="js/script.js"></script>
+</html>
