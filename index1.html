@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cssDrag/todolistEX.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400&family=Open+Sans+Condensed:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>To Do List</title>
+</head>
+<body>
+    <div class="todoList" id="app">
+        <div class="container">
+            <div class="stats">
+                <h3 class="stats_title">{{"Текущие задачи: " + completed_task.length }}</h3>
+                <ul v-on:drop="drop"
+                    v-on:dragover="allowDrop">
+                    <li v-for = "(item, index) in completed_task"
+                        v:key = "index" draggable="true"
+                        v-on:dragstart="dragStart">
+                        <p>
+                            {{item.title}}
+                            {{item.desc}}
+                        </p>
+                        <button @click = "add_done_tasks(index)" class="task_done">Выполнено</button>
+                        <button @click = "delete_tasks(index)" class="add_task_done">Удалить</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="stats">
+                <h3 class="stats_title">{{"Выполненные задачи: " + current_task.length }}</h3>
+                <ul v-on:drop="drop"
+                    v-on:dragover="allowDrop">
+                    <li v-for = "(item_done, index) in current_task"
+                        v:key = "index" draggable="true"
+                        v-on:dragstart="dragStart">
+                        <p>
+                          {{item_done.title}}
+                          {{item_done.desc}}
+                        </p>
+                        <button @click = "delete_tasks_current(index)" class="add_task_done">Удалить</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="jsDrag/script_ex.js"></script>
+</html>
